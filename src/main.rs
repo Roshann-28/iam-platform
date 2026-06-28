@@ -4,6 +4,7 @@ mod errors;
 mod routes;
 use config::Config;
 mod jwt;
+mod middleware;
 mod models;
 
 #[tokio::main]
