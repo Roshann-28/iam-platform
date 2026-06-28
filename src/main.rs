@@ -12,19 +12,16 @@ async fn main() {
     // Load config from .env
     let config = Config::load();
 
-    // Setup logging
-    tracing_subscriber::fmt::init();
-
     // Connect to database
     let pool = db::connect(&config).await;
-    tracing::info!("Connected to database successfully");
 
     // Build app
-    let app = routes::create_router(pool);
+    let app = routes::create_router(pool, config);
+    println!("Connected to database");
 
     // Start server
     let listener = tokio::net::TcpListener::bind("0.0.0.0:3000").await.unwrap();
 
-    tracing::info!("Server running on http://localhost:3000");
+    println!("Server running on http://localhost:3000");
     axum::serve(listener, app).await.unwrap();
 }
