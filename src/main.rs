@@ -2,8 +2,9 @@ mod config;
 mod db;
 mod errors;
 mod routes;
-
 use config::Config;
+mod jwt;
+mod models;
 
 #[tokio::main]
 async fn main() {
